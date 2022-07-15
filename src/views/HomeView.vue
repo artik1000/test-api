@@ -1,18 +1,30 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <main class="home">
+   <h1 class="page__description">Users Page</h1>
+      <user-slider
+              :users="sortByCity"
+      />
+  </main>
 </template>
-
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import {mapState, mapMutations, mapActions, mapGetters} from 'vuex'
+import UserSlider from '@/components/MySlider/UserSlider'
 export default {
   name: 'HomeView',
   components: {
-    HelloWorld
+    UserSlider
+  },
+  computed: {
+      ...mapState({
+          users: state => state.TestModule.users,
+      }),
+      ...mapGetters({
+          sortByCity: 'TestModule/sortByCity'
+      })
   }
 }
 </script>
+<style lang="sass" scoped>
+.home
+    padding: 24px
+</style>
